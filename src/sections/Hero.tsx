@@ -1,25 +1,105 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { site } from "@/config/site";
+
+const container = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.15 },
+  },
+} as const;
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0 },
+} as const;
+
 const Hero: React.FC = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white">
-      <div className="text-center px-6">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
-          Building <span className="text-blue-500">Modern</span>
-          <br />
-          Web Experiences
-        </h1>
+    <section className="min-h-screen flex items-center bg-gradient-to-br from-brand-bg-dark via-brand-bg-mid to-brand-bg-light text-white overflow-hidden py-20 md:py-24">
+      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-[1.2fr_1fr] gap-12 items-center">
+        <motion.div
+          className="text-center md:text-left"
+          initial="hidden"
+          animate="show"
+          variants={container}
+        >
+          <motion.p className="text-sm tracking-wider text-brand-accent/80" variants={item}>
+            {site.role}
+          </motion.p>
+          <motion.h1
+            className="mt-2 text-5xl md:text-7xl font-extrabold tracking-tight"
+            variants={item}
+          >
+            Hi, I&#39;m
+            <span className="ml-2 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
+              {site.name}
+            </span>
+          </motion.h1>
 
-        <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-          React • Next.js • Node.js • Strapi
-        </p>
+          <motion.p
+            className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl md:max-w-xl mx-auto md:mx-0"
+            variants={item}
+          >
+            {site.tagline}
+          </motion.p>
+          <motion.p
+            className="mt-3 text-base md:text-lg text-white/80 max-w-2xl md:max-w-xl mx-auto md:mx-0"
+            variants={item}
+          >
+            {site.summary}
+          </motion.p>
 
-        <div className="mt-10 flex justify-center gap-6">
-          <button className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-lg font-medium">
-            View Projects
-          </button>
+          <motion.div
+            className="mt-10 flex justify-center md:justify-start gap-3 md:gap-4"
+            variants={item}
+          >
+            <a
+              href={site.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 h-11 px-5 md:px-6 rounded-lg
+              bg-gradient-to-r from-brand-primary to-brand-secondary text-white
+              shadow-lg shadow-brand-primary/20 transition
+              hover:brightness-105 active:brightness-95
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2"
+            >
+              View Resume
+            </a>
+            <a
+              href={site.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 h-11 px-5 md:px-6 rounded-lg
+              border border-white/40 bg-white/10 text-white backdrop-blur-sm
+              hover:bg-white hover:text-black transition active:brightness-95
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2"
+            >
+              LinkedIn
+            </a>
+          </motion.div>
+        </motion.div>
 
-          <button className="px-6 py-3 rounded-xl border border-gray-400 hover:bg-white hover:text-black transition text-lg font-medium">
-            Contact Me
-          </button>
+        <div className="relative flex justify-center md:justify-end">
+          <div className="absolute -z-10 size-72 md:size-96 rounded-full bg-brand-secondary/30 blur-3xl" />
+
+          <motion.div
+            className="relative w-56 h-56 md:w-72 md:h-72"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Image
+              src="/images/profile.jpg"
+              alt="Profile photo"
+              fill
+              priority
+              className="rounded-full ring-4 ring-white/20 shadow-2xl object-cover"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

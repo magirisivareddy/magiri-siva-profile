@@ -13,8 +13,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className="pt-20">
+    <html lang="en" className="h-full">
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
         <Navbar />
         {children}
       </body>
